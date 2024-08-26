@@ -29,6 +29,7 @@ public class Controlador {
         return new ResponseEntity<>(tareas, HttpStatus.OK);
     }
 
+    //endpoint
     @GetMapping("/estado/{estado}")
     public ResponseEntity<List<Tarea>> listarTareasPorEstado(@PathVariable String estado) {
         List<Tarea> tareas = tareaService.listarTareasPorEstado(estado);

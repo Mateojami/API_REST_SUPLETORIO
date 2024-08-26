@@ -9,6 +9,7 @@ import uce.edu.ec.ApiSupletorio.repository.TareaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TareaService {
@@ -31,14 +32,17 @@ public class TareaService {
     }
 
 
-
     public List<Tarea> listarTareas() {
         return tareaRepository.findAll();
     }
 
+    //uso de streams
     public List<Tarea> listarTareasPorEstado(String estado) {
-        return tareaRepository.findByEstado(estado);
+        return tareaRepository.findAll().stream()
+                .filter(tarea -> tarea.getEstado().equalsIgnoreCase(estado))
+                .collect(Collectors.toList());
     }
+
 
     public void eliminarTarea(Long id) {
         if (tareaRepository.existsById(id)) {
